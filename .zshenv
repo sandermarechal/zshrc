@@ -1,3 +1,3 @@
-
+export ZDOTDIR="$HOME/.config/zsh"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$HOME/.local/bin:$PATH"
