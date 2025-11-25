@@ -21,3 +21,6 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # Aliases
 alias zz='z $(git rev-parse --show-toplevel || echo .)'
+
+# Custom modules
+source ${ZDOTDIR:-$HOME}/plugins/git.zsh
