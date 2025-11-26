@@ -22,5 +22,25 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Aliases
 alias zz='z $(git rev-parse --show-toplevel || echo .)'
 
+# Easy robo shortcut, with auto-complete
+function r() {
+    top=$(git rev-parse --show-toplevel 2&>/dev/null)
+    if [[ -d "$top" ]]; then
+        "$top/bin/robo" "$@"
+    else
+        return 1
+    fi
+}
+
+_auto_r() {
+    top=$(git rev-parse --show-toplevel 2&>/dev/null)
+    if [[ -d "$top" ]] && [[ -f "$top/bin/robo" ]]; then
+        eval "$($top/bin/robo completion)"
+        compdef r=robo
+    fi
+}
+
+add-zsh-hook chpwd _auto_r
+
 # Custom modules
 source ${ZDOTDIR:-$HOME}/plugins/git.zsh
